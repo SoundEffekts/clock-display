@@ -75,10 +75,25 @@ public class ClockDisplay
     
     /**
      * Update the internal string that represents the display.
+     * Updated on 9/28/15 to add a way of reflecting American time using if/else chain
      */
     private void updateDisplay()
     {
-        displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+        if
+            (hours.getValue()==0)
+            {
+                displayString = "00:" + minutes.getDisplayValue()+"AM";
+            }    
+            else 
+                if
+                    (hours.getValue()>12)
+                            {
+                                hours.setValue(hours.getValue()-12);
+                                displayString = hours.getDisplayValue() + ":" + minutes.getDisplayValue()+"PM";  
+                            }
+                else
+                            {
+                                displayString = hours.getDisplayValue() + ":" + minutes.getDisplayValue()+"AM";                    
+                            }
     }
 }
